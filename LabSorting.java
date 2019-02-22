@@ -212,12 +212,28 @@ public class LabSorting  {
    *
    * @param array the array to sort
    */
-  public static void mergeSort(int[] array) {
-    // Recursevily mergesort
+  public static void mergeSort(int[] array){
+    mergeSort(array, array.length);
+  }
 
+  public static void mergeSort(int[] a, int n) {
+    if (n < 2) {
+      return;
+    }
+    int mid = n / 2;
+    int[] l = new int[mid];
+    int[] r = new int[n - mid];
 
-    // Merge the left and right sub-arrays
-    throw new UnsupportedOperationException();
+    for (int i = 0; i < mid; i++) {
+      l[i] = a[i];
+    }
+    for (int i = mid; i < n; i++) {
+      r[i - mid] = a[i];
+    }
+    mergeSort(l, mid);
+    mergeSort(r, n - mid);
+
+    merge(a, l, r, mid, n - mid);
   }
 
   /**
@@ -227,11 +243,26 @@ public class LabSorting  {
    * @param left  How far we have got in the left array
    * @param right How far we have got in the right array
    */
-  private static void merge(int[] array, int[] left, int[] right) {
+  private static void merge( int[] array, int[] leftArray, int[] rightArray, int left, int right){
+
+    int i = 0, j = 0, k = 0;
+    while (i < left && j < right) {
+      if (leftArray[i] <= rightArray[j]) {
+        array[k++] = leftArray[i++];
+      } else {
+        array[k++] = rightArray[j++];
+      }
+    }
+    while (i < left) {
+      array[k++] = leftArray[i++];
+    }
+    while (j < right) {
+      array[k++] = rightArray[j++];
+    }
+
 
     // Idea: repeatedly copy one element from either the left or right array to the
     // result array.
-    throw new UnsupportedOperationException();
   }
 
   public static void main(String[] args) {
