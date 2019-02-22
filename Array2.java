@@ -261,22 +261,6 @@ public class Array2 {
         return longestPalindrome;
     }
 
-    public int isPalindrome2(int i, int j) {
-        int length = j - i + 1;
-        for (int k = 0; k < (j - i) / 2; k++) {
-            if (this.arr[i + k + 1] != this.arr[j - k - 1]) {
-                return 1;
-            }
-        }
-        return length;
-    }
-
-    /**
-     * Assignment 2 Question 3 returns the sum of the largest contiguous ascending
-     * array
-     *
-     * @return the sum
-     */
     public int maxInterval() {
         return sumitupbabey(0,size-1);
     }
@@ -360,63 +344,60 @@ public class Array2 {
         return Math.max(maxLeftLength, Math.max(maxRightLength, (rightCurrentLength - leftCurrentLength)));
 
     }
+
     /**
      * Assignment 2 Question 3 Return the median value of an array.
      *
      * @return the median
      */
-    public int median() {
-        public int median (){
-            int k = 0;
+    public int median (){
+        int k = 0;
 
-            return findMedian(0,size-1,(size-1)/2);
+        return findMedian(0,size-1,(size-1)/2);
+    }
+
+    public int findMedian (int startInd, int endInd, int k){
+        if (size <= 2){
+            return arr[0];
         }
 
-        public int findMedian (int startInd, int endInd, int k){
-            if (size <= 2){
-                return arr[0];
-            }
+        else if (startInd == endInd) {
+            return arr[startInd];
+        }
+        int pivot = partition(startInd, endInd);
+        if (pivot == k) {
+            return arr[pivot];
+        } else if (k < pivot) {
+            return findMedian(startInd, pivot - 1, k);
+        } else {
+            return findMedian(pivot + 1, endInd, k);
+        }
+    }
+    public int partition(int startIndex, int endIndex) {
+        int pivot = startIndex;
+        int partitionIndex = startIndex;
+        for (int i = startIndex; i <= endIndex; i++) {
+            if (arr[i] <= arr[pivot]) {
+                swap(arr, i,partitionIndex);
 
-            else if (startInd == endInd) {
-                return arr[startInd];
-            }
-            int pivot = partition(startInd, endInd);
-            if (pivot == k) {
-                return arr[pivot];
-            } else if (k < pivot) {
-                return findMedian(startInd, pivot - 1, k);
-            } else {
-                return findMedian(pivot + 1, endInd, k);
+                partitionIndex++;
             }
         }
-        public int partition(int startIndex, int endIndex) {
-            int pivot = startIndex;
-            int partitionIndex = startIndex;
-            for (int i = startIndex; i <= endIndex; i++) {
-                if (arr[i] <= arr[pivot]) {
-                    swap(arr, i,partitionIndex);
 
-                    partitionIndex++;
-                }
-            }
+        swap(arr, partitionIndex-1, pivot);
 
-            swap(arr, partitionIndex-1, pivot);
-
-            return partitionIndex-1;
-        }
+        return partitionIndex-1;
     }
 
     public static void main(String[] args) {
-        Array2 a = new Array2(7);
-        a.set(0,1);
-        a.set(1,2);
-        a.set(2,3);
-        a.set(3,4);
-        a.set(4,5);
-        a.set(5,6);
+        Array2 a = new Array2(3);
+        a.set(0,0);
+        a.set(1,24);
+        a.set(2,27);
 
-
+        System.out.println(a.sumitupbabey(0, a.size-1));
         System.out.println(a.maxInterval());
+
 
 
 
