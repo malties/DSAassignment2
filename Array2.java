@@ -348,8 +348,8 @@ public class Array2 {
             return 0;
         }
 
-        int maxLeftLength = sumThing(a, left, median);
-        int maxRightLength = sumThing(a, median + 1, right);
+        int maxLeftLength = sumitupbabey(a, left, median);
+        int maxRightLength = sumitupbabey(a, median + 1, right);
         if(!(a[median] > a[median + 1])) {
             //center to left
             for (int i = median; i > left; i--){
