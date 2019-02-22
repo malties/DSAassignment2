@@ -329,7 +329,7 @@ public class Array2 {
 
     public static int sumitupbabey(int[] a, int left, int right){
 
-        int maxLeftCurrentLength = 0, maxRightCurrentLength = 0, leftCurrentLength = 0, rightCurrentLength = 0, median = (left + right)/2;
+        int leftCurrentLength = 0, rightCurrentLength = 0, median = (left + right)/2;
 
         if (a.length == 0 || a.length == 1){
             return -1;
@@ -348,8 +348,8 @@ public class Array2 {
             return 0;
         }
 
-        int maxLeftLength = sumThing(a, left, median);
-        int maxRightLength = sumThing(a, median + 1, right);
+        int maxLeftLength = sumitupbabey(a, left, median);
+        int maxRightLength = sumitupbabey(a, median + 1, right);
         if(!(a[median] > a[median + 1])) {
             //center to left
             for (int i = median; i > left; i--){
