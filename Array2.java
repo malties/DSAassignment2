@@ -327,6 +327,63 @@ public class Array2 {
         return maxDiff;
     }
 
+    public static int sumitupbabey(int[] a, int left, int right){
+
+        int maxLeftCurrentLength = 0, maxRightCurrentLength = 0, leftCurrentLength = 0, rightCurrentLength = 0, median = (left + right)/2;
+
+        if (a.length == 0 || a.length == 1){
+            return -1;
+        }
+
+        //base case
+        if (left == right) {
+            return a[left];
+        }
+
+        if (left == right -1 && a[left] < a[right]){
+            return a[right] - a[left];
+        }
+
+        if (left == right -1 ){
+            return 0;
+        }
+
+        int maxLeftLength = sumThing(a, left, median);
+        int maxRightLength = sumThing(a, median + 1, right);
+        if(!(a[median] > a[median + 1])) {
+            //center to left
+            for (int i = median; i > left; i--){
+                if (a[i] < a[i-1]) {
+                    i = left;
+                } else {
+                    leftCurrentLength = a[i - 1];
+                }
+            }
+            if(leftCurrentLength == 0) {
+                leftCurrentLength = a[median];
+            }
+            //to the right to the right
+            for (int i = median + 1; i <= right; i++) {
+                if (median == right - 1) {
+                    rightCurrentLength = a[i];
+                } else {
+                    if (a[i] > a[i + 1]) {
+                        i = right;
+                    } else {
+                        rightCurrentLength = a[i + 1];
+                    }
+                }
+            }
+            if (rightCurrentLength == 0) {
+                rightCurrentLength = a[median + 1];
+            }
+
+        }
+
+        return Math.max(maxLeftLength, Math.max(maxRightLength, (rightCurrentLength - leftCurrentLength)));
+
+    }
+
 
 
     /**
