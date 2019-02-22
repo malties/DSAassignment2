@@ -300,8 +300,8 @@ public class Array2 {
      *
      * @return the sum
      */
-  public int maxInterval() {
-        return maxIntervalNonRec();
+    public int maxInterval() {
+        return sumitupbabey(0,size);
     }
 
     public int maxIntervalNonRec() {
@@ -327,112 +327,55 @@ public class Array2 {
         return maxDiff;
     }
 
-    public static int sumitupbabey(int[] a, int left, int right){
-
-        int leftCurrentLength = 0, rightCurrentLength = 0, median = (left + right)/2;
-
-        if (a.length == 0 || a.length == 1){
-            return -1;
-        }
-
-        //base case
-        if (left == right) {
-            return a[left];
-        }
-
-        if (left == right -1 && a[left] < a[right]){
-            return a[right] - a[left];
-        }
-
-        if (left == right -1 ){
-            return 0;
-        }
-
-        int maxLeftLength = sumitupbabey(a, left, median);
-        int maxRightLength = sumitupbabey(a, median + 1, right);
-        if(!(a[median] > a[median + 1])) {
-            //center to left
-            for (int i = median; i > left; i--){
-                if (a[i] < a[i-1]) {
-                    i = left;
-                } else {
-                    leftCurrentLength = a[i - 1];
-                }
-            }
-            if(leftCurrentLength == 0) {
-                leftCurrentLength = a[median];
-            }
-            //to the right to the right
-            for (int i = median + 1; i <= right; i++) {
-                if (median == right - 1) {
-                    rightCurrentLength = a[i];
-                } else {
-                    if (a[i] > a[i + 1]) {
-                        i = right;
-                    } else {
-                        rightCurrentLength = a[i + 1];
-                    }
-                }
-            }
-            if (rightCurrentLength == 0) {
-                rightCurrentLength = a[median + 1];
-            }
-
-        }
-
-        return Math.max(maxLeftLength, Math.max(maxRightLength, (rightCurrentLength - leftCurrentLength)));
-
-    }
-
-    public static int sumitupbabey(int[] a, int left, int right){
+    public int sumitupbabey(int left, int right){
 
         int maxLeftCurrentLength = 0, maxRightCurrentLength = 0, leftCurrentLength = 0, rightCurrentLength = 0, median = (left + right)/2;
 
-        if (a.length == 0 || a.length == 1){
+        if (size == 0 || size == 1){
             return -1;
         }
 
         //base case
         if (left == right) {
-            return a[left];
+            return arr[left];
         }
 
-        if (left == right -1 && a[left] < a[right]){
-            return a[right] - a[left];
+        if (left == right -1 && arr[left] < arr[right]){
+            return arr[right] - arr[left];
         }
 
         if (left == right -1 ){
             return 0;
         }
 
-        int maxLeftLength = sumitupbabey(a, left, median);
-        int maxRightLength = sumitupbabey(a, median + 1, right);
-        if(!(a[median] > a[median + 1])) {
+        int maxLeftLength = sumitupbabey(left, median);
+        int maxRightLength = sumitupbabey(median + 1, right);
+        if(!(arr[median] > arr[median + 1])) {
             //center to left
             for (int i = median; i > left; i--){
-                if (a[i] < a[i-1]) {
+                if (arr[i] < arr[i-1]) {
                     i = left;
                 } else {
-                    leftCurrentLength = a[i - 1];
+                    leftCurrentLength = arr[i - 1];
                 }
             }
             if(leftCurrentLength == 0) {
-                leftCurrentLength = a[median];
+                leftCurrentLength = arr[median];
             }
             //to the right to the right
             for (int i = median + 1; i <= right; i++) {
                 if (median == right - 1) {
-                    rightCurrentLength = a[i];
+                    rightCurrentLength = arr[i];
                 } else {
-                    if (a[i] > a[i + 1]) {
+                    if (arr[i] > arr[i + 1]) {
                         i = right;
                     } else {
-                        rightCurrentLength = a[i + 1];
+                        rightCurrentLength = arr[i + 1];
                     }
                 }
             }
             if (rightCurrentLength == 0) {
-                rightCurrentLength = a[median + 1];
+                rightCurrentLength = arr[median + 1];
             }
 
         }
