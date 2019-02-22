@@ -1,7 +1,5 @@
 package Assignments;
 
-import java.util.Arrays;
-
 //Group Number: 35
 //Group Members: Nicholas Fisher. Hannah Maltkvist
 public class Array2 {
@@ -19,6 +17,7 @@ public class Array2 {
     }
 
     /**
+     *
      * @return the size of the Array
      */
     public int size() {
@@ -47,6 +46,7 @@ public class Array2 {
     }
 
     /**
+     *
      * @return the content of the array as a String
      */
     public String toString() {
@@ -97,8 +97,8 @@ public class Array2 {
                 return false;
             }
         }
-        return true;
-    }
+           return true;
+        }
 
 
     /**
@@ -107,24 +107,24 @@ public class Array2 {
      * @return the length of longest increasing sub array
      */
     public int maxNonDecreasing() {
-        if (size == 0) {
+        if (size == 0){
             return 0;
         }
         int max = 1;
         int currentMax = 1;
-        for (int i = 1; i < size; i++) {
-            if (arr[i - 1] <= arr[i]) {
-                currentMax++;
-            } else {
-                if (currentMax > max) {
-                    max = currentMax;
-                }
-                currentMax = 1;
+        for(int i = 1; i < size; i++){
+            if (arr [i-1] <= arr[i]){
+               currentMax++;
+            }else{
+            if (currentMax > max ){
+                max = currentMax;
             }
+            currentMax=1;
+          }
         }
-        if (currentMax > max) {
+        if (currentMax>max){
             return currentMax;
-        } else {
+        }else{
             return max;
         }
     }
@@ -137,19 +137,19 @@ public class Array2 {
      * @return the index where the subarray starts
      */
     public int subArrayIndex(Array2 b) {
-        for (int i = 0; i <= (size - b.size); i++) {
-            boolean isEqual = true;
-            int j = 0;
-            while (isEqual && (j <= b.size)) {
-                if (arr[i + j] == b.get(j)) {
-                    j++;
-                } else {
-                    isEqual = false;
-                }
-            }
-            if (isEqual) {
-                return i;
-            }
+        for (int i = 0; i<=(size - b.size); i++){
+          boolean isEqual = true;
+          int j = 0;
+          while (isEqual && (j <= b.size)){
+              if (arr[i+j]==b.get(j)){
+                  j++;
+              }else {
+                  isEqual = false;
+              }
+          }
+          if (isEqual){
+              return i;
+          }
         }
         return -1;
     }
@@ -171,30 +171,7 @@ public class Array2 {
      * @return the sum of the subarray
      */
     public static int maxSubarraySum(int[] array, int lo, int hi) {
-        int maxLeftBorderSum = 0, maxRightBorderSum = 0;
-        int leftBorderSum = 0, rightBorderSum = 0;
-        int center = (lo + hi) / 2;
-
-        if (lo == hi)//Base Case
-            return array[lo] > 0 ? array[hi] : 0;
-
-        int maxLeftSum = maxSubarraySum(array, lo, center);
-        int maxRightSum = maxSubarraySum(array, center + 1, hi);
-
-        for (int i = center; i >= lo; i--) {
-            leftBorderSum += array[i];
-            if (leftBorderSum > maxLeftBorderSum) {
-                maxLeftBorderSum = leftBorderSum;
-            }
-        }
-
-        for (int i = center + 1; i <= hi; i++) {
-            rightBorderSum += array[i];
-            if (rightBorderSum > maxRightBorderSum) {
-                maxRightBorderSum = rightBorderSum;
-            }
-        }
-        return Math.max(maxLeftSum, Math.max(maxRightSum, (maxLeftBorderSum + maxRightBorderSum)));
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -202,10 +179,10 @@ public class Array2 {
      */
     public void reverse() {
         int tempNum = 0;
-        for (int i = 0; i < size / 2; i++) {
+        for (int i = 0; i<size/2; i++){
             tempNum = arr[i];
-            arr[i] = arr[size - 1 - i];
-            arr[size - 1 - i] = tempNum;
+            arr[i]=arr[size-1-i];
+            arr[size-1-i]=tempNum;
         }
     }
 
@@ -215,11 +192,11 @@ public class Array2 {
      * @param i the element to remove
      */
     public void remove(int i) {
-        if (i < 0 || i > size) {
+        if (i<0||i>size){
             throw new UnsupportedOperationException("Invalid index");
         }
-        for (int x = i; x < size; x++) {
-            arr[x] = arr[x + 1];
+        for(int x = i; x<size; x++){
+            arr[x]= arr[x+1];
         }
         size--;
     }
@@ -231,10 +208,10 @@ public class Array2 {
      * @param i the element to remove
      */
     public void remove2(int i) {
-        if (i < 0 || i > size) {
+        if (i<0||i>size){
             throw new UnsupportedOperationException("Invalid index");
         }
-        arr[i] = arr[size - 1];
+        arr[i] = arr[size-1];
         size--;
     }
 
@@ -247,11 +224,11 @@ public class Array2 {
      */
     public int find(int x) {
         int num = 0;
-        for (int i = 0; i < size; i++) {
-            if (arr[i] == x) {
+        for(int i = 0; i<size; i++){
+            if (arr[i]==x){
                 num = i;
                 break;
-            } else {
+            }else{
                 num = -1;
             }
         }
@@ -267,7 +244,7 @@ public class Array2 {
 
     public int maxPalindrome() {
         int longestPalindrome = 1;
-        if (size == 0) {
+        if (size==0){
             longestPalindrome = 0;
         }
         for (int i = 0; i < this.size; i++) {
@@ -301,7 +278,7 @@ public class Array2 {
      * @return the sum
      */
     public int maxInterval() {
-        return sumitupbabey(0,size);
+        return sumitupbabey(0,size-1);
     }
 
     public int maxIntervalNonRec() {
@@ -383,49 +360,50 @@ public class Array2 {
         return Math.max(maxLeftLength, Math.max(maxRightLength, (rightCurrentLength - leftCurrentLength)));
 
     }
-
     /**
      * Assignment 2 Question 3 Return the median value of an array.
      *
      * @return the median
      */
-    public int median (){
-        int k = 0;
+    public int median() {
+        public int median (){
+            int k = 0;
 
-        return findMedian(0,size-1,(size-1)/2);
-    }
-
-    public int findMedian (int startInd, int endInd, int k){
-        if (size <= 2){
-            return arr[0];
+            return findMedian(0,size-1,(size-1)/2);
         }
 
-        else if (startInd == endInd) {
-            return arr[startInd];
-        }
-        int pivot = partition(startInd, endInd);
-        if (pivot == k) {
-            return arr[pivot];
-        } else if (k < pivot) {
-            return findMedian(startInd, pivot - 1, k);
-        } else {
-            return findMedian(pivot + 1, endInd, k);
-        }
-    }
-    public int partition(int startIndex, int endIndex) {
-        int pivot = startIndex;
-        int partitionIndex = startIndex;
-        for (int i = startIndex; i <= endIndex; i++) {
-            if (arr[i] <= arr[pivot]) {
-                swap(arr, i,partitionIndex);
+        public int findMedian (int startInd, int endInd, int k){
+            if (size <= 2){
+                return arr[0];
+            }
 
-                partitionIndex++;
+            else if (startInd == endInd) {
+                return arr[startInd];
+            }
+            int pivot = partition(startInd, endInd);
+            if (pivot == k) {
+                return arr[pivot];
+            } else if (k < pivot) {
+                return findMedian(startInd, pivot - 1, k);
+            } else {
+                return findMedian(pivot + 1, endInd, k);
             }
         }
+        public int partition(int startIndex, int endIndex) {
+            int pivot = startIndex;
+            int partitionIndex = startIndex;
+            for (int i = startIndex; i <= endIndex; i++) {
+                if (arr[i] <= arr[pivot]) {
+                    swap(arr, i,partitionIndex);
 
-        swap(arr, partitionIndex-1, pivot);
+                    partitionIndex++;
+                }
+            }
 
-        return partitionIndex-1;
+            swap(arr, partitionIndex-1, pivot);
+
+            return partitionIndex-1;
+        }
     }
 
     public static void main(String[] args) {
@@ -435,10 +413,7 @@ public class Array2 {
         a.set(2,3);
         a.set(3,4);
         a.set(4,5);
-        a.set(5,20);
-        a.set(6,3);
-        a.set(7,13);
-        a.set(8,5);
+        a.set(5,6);
 
 
         System.out.println(a.maxInterval());
