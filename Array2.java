@@ -261,6 +261,23 @@ public class Array2 {
         return longestPalindrome;
     }
 
+    public int isPalindrome2(int i, int j) {
+        int length = j - i + 1;
+        for (int k = 0; k < (j - i) / 2; k++) {
+            if (this.arr[i + k + 1] != this.arr[j - k - 1]) {
+                return 1;
+            }
+        }
+        return length;
+    }
+
+    /**
+     * Assignment 2 Question 3 returns the sum of the largest contiguous ascending
+     * array
+     *
+     * @return the sum
+     */
+
     public int maxInterval() {
         return sumitupbabey(0,size-1);
     }
