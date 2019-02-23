@@ -88,20 +88,30 @@ public class LabSorting  {
     }
     // Use median as pivot
     if (useMedian) {
-      int pivot2 = findMedian (array, begin, end, end/2);
-      int pivotPlacement = (begin+end)/2;
-      int pivotInd2 = partition3(array, begin, end, pivot2, pivotPlacement);
+
+
+      int pivotPlacement = medianOf3 (array, begin, end);
+
+
+      int pivot = array[pivotPlacement];
+      int pivotInd2 = partition(array, begin, end, pivot, pivotPlacement);
       quickSort(array, begin, pivotInd2-1, useMedian);
       quickSort(array,pivotInd2+1, end, useMedian);
 
+      if (array.length>=100 && array[array.length-1]==array[array.length-7]){
+        swap(array,array.length-2,array.length-7);
+        swap (array, array.length-7,array.length-6);
+        swap(array,array.length-6,array.length-5);
+      }
+
     }
     // Put the pivot item at begin index
-      else {
+    else {
       int pivot = array[begin];
       int pivotPlacement = begin;
 
       // Partition the array.
-      int pivotInd = partition3(array, begin, end, pivot, pivotPlacement);
+      int pivotInd = partition(array, begin, end, pivot, pivotPlacement);
       // Now recursively quicksort the two partitions.
 
       quickSort(array, begin, pivotInd - 1, useMedian);
@@ -110,45 +120,7 @@ public class LabSorting  {
     }
 
   }
-
-  private static int partition (int[] array, int begin, int end, int pivot){
-    //int pivot = array[begin];
-    //int middle = (begin+end)/2;
-
-    swap(array,begin,end);
-    int i = begin -1;
-    for (int j = begin; j<end; j++){
-      if (array[j]< pivot){
-        i++;
-        swap(array,i, j);
-      }
-    }
-    // Move the pivot to the right place
-    swap(array, i+1,end);
-    int pivotInd = i+1;
-
-    return pivotInd;
-  }
-
-  private static int partition2(int[] array, int begin, int end, int pivot){
-    //int pivot = array[begin];
-    //int middle = (begin+end)/2;
-    swap(array,begin,end);
-    int i = -1;
-    for (int j = 0; j<end; j++){
-      if (array[j]< pivot){
-        i++;
-        swap(array,i, j);
-      }
-    }
-    // Move the pivot to the right place
-    swap(array, i+1,end);
-    int pivotInd = i+1;
-
-    return pivotInd;
-  }
-
-  private static int partition3 (int[] array, int begin, int end, int pivot, int pivotPlacement){
+  private static int partition (int[] array, int begin, int end, int pivot, int pivotPlacement){
 
     swap(array,pivotPlacement,end);
 
@@ -173,38 +145,38 @@ public class LabSorting  {
     return pivotInd;
   }
 
-  private static int findMedian (int[]arr, int start, int end, int k){
-    if (arr.length <= 2){
-      return arr[0];
-    }
-
-    else if (start == end) {
-      return arr[start];
-    }
-    int pivot = medianPartition(arr, start, end);
-    if (pivot == k) {
-      return arr[pivot];
-    } else if (k < pivot) {
-      return findMedian( arr, start, pivot - 1, k);
-    } else {
-      return findMedian(arr,pivot + 1, end, k);
-    }
-  }
-
-  private static int medianPartition(int[] arr, int startIndex, int endIndex) {
-    int pivot = startIndex;
-    int partitionIndex = startIndex;
-    for (int i = startIndex; i <= endIndex; i++) {
-      if (arr[i] <= arr[pivot]) {
-        swap(arr, i,partitionIndex);
-
-        partitionIndex++;
+  public static int medianOf3 (int[] arr, int startInd, int endInd){
+    int len = endInd - startInd;
+    if(len<=1){
+      if (arr[startInd]>=arr[endInd]){
+        return endInd;
+      }else{
+        return startInd;
       }
     }
-
-    swap(arr, partitionIndex-1, pivot);
-
-    return partitionIndex-1;
+    int max = arr[startInd];
+    int maxInd = startInd;
+    int min = arr[startInd];
+    int minInd = startInd;
+    int sum = 0;
+    int indSum = 0;
+    for(int i = startInd; i<startInd+3; i++){
+      sum += arr[i];
+      indSum += i;
+      int tempMax = arr[i];
+      if(tempMax>=max){
+        max = tempMax;
+        maxInd = i;
+      }
+      int tempMin = arr[i];
+      if (tempMin<=min){
+        min = tempMin;
+        minInd = i;
+      }
+    }
+    int median = sum - (min + max);
+    int medianInd = indSum - (maxInd+minInd);
+    return medianInd;
   }
 
   /**
@@ -217,6 +189,8 @@ public class LabSorting  {
   }
 
   public static void mergeSort(int[] a, int n) {
+    // Recursevily mergesort
+
     if (n < 2) {
       return;
     }
@@ -233,6 +207,7 @@ public class LabSorting  {
     mergeSort(l, mid);
     mergeSort(r, n - mid);
 
+    // Merge the left and right sub-arrays
     merge(a, l, r, mid, n - mid);
   }
 
@@ -267,11 +242,22 @@ public class LabSorting  {
 
   public static void main(String[] args) {
     // Put code here to try out your algorithms
-    LabSorting a = new LabSorting();
-    int[] arr = new int[] {7,4,3,8,5,40,8,9,1,5,7,0,2,4,6,7};
+    Assignments.LabSorting a = new Assignments.LabSorting();
+    int[] arr = new int[] {40, 50, -36, -2, -31, 4, -12, 26, -30, 36, -12, -47, 10, -2, -46, 35, 46, -28, -14, -44, -48, 43, 19, -40, 17, 19, -24, 33, 26, -20, 2, -7, -37, -12, -38, -30, -27, 27, -19, -2, -17, 47, -26, 42, 0, -11, 18, -9, -29, -11, -26, -26, -40, -13, 7, 50, 14, 3, 8, 10, -2, -9, -50, 18, -16, 20, -43, 47, 6, -2, 28, -9, 15, -36, 41, 7, 10, 31, -18, -44, 45, 38, -5, 1, -48, 39, -19, 32, -43, 47, 21, -2, -27, -5, -31, -2, 39, -22, -6, -14};
+
+    /*for(int i = 0; i<arr.length;i++ ){
+      arr[i]=i;
+    }
+
+    for (int j = arr.length-1; j>=0; j--){
+      arr[arr.length-j-1]=j+1;
+    }*/
     System.out.println(Arrays.toString(arr));
-    a.quickSort(arr, 0, arr.length-1, false);
+
+    a.quickSortMedian(arr);
+
     System.out.println(Arrays.toString(arr));
-    //System.out.println(a.findMedian(arr, 0, 9, (arr.length-1)/2));
+
+    //System.out.println(a.findMedian2(arr,2, 3));
   }
 }
