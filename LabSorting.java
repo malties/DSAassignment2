@@ -242,7 +242,7 @@ public class LabSorting  {
 
   public static void main(String[] args) {
     // Put code here to try out your algorithms
-    Assignments.LabSorting a = new Assignments.LabSorting();
+    LabSorting a = new LabSorting();
     int[] arr = new int[] {40, 50, -36, -2, -31, 4, -12, 26, -30, 36, -12, -47, 10, -2, -46, 35, 46, -28, -14, -44, -48, 43, 19, -40, 17, 19, -24, 33, 26, -20, 2, -7, -37, -12, -38, -30, -27, 27, -19, -2, -17, 47, -26, 42, 0, -11, 18, -9, -29, -11, -26, -26, -40, -13, 7, 50, 14, 3, 8, 10, -2, -9, -50, 18, -16, 20, -43, 47, 6, -2, 28, -9, 15, -36, 41, 7, 10, 31, -18, -44, 45, 38, -5, 1, -48, 39, -19, 32, -43, 47, 21, -2, -27, -5, -31, -2, 39, -22, -6, -14};
 
     /*for(int i = 0; i<arr.length;i++ ){
